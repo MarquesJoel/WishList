@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  wishlist.api:
+    image: ${DOCKER_REGISTRY-}wishlistapi
+    build:
+      context: .
+      dockerfile: src/WishList.API/Dockerfile
