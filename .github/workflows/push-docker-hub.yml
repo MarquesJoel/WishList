@@ -12,24 +12,21 @@ jobs:
   CI:
     runs-on: ubuntu-20.04
     steps:
-      -
-       name: Docker Hub Login
-       uses: docker/login-action@v2
-       with:
-        username: ${{secrets.DOCKER_HUB_USER}}
-        password: ${{secrets.DOCKER_HUB_PASSWORD}}
-      
-      -
-        name: Build and push
+
+      - name: Checkout
+        uses: actions/checkout@v3.0.0
+
+      - name: Docker Hub Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{secrets.DOCKER_HUB_USER}}
+          password: ${{secrets.DOCKER_HUB_PASSWORD}}
+
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: "{{defaultContext}}"
           file: ./src/WishList.API/Dockerfile
           push: true
           tags: |
-           joelmarques18/wishlist:latest
-           joelmarques18/wishlist:v${{ github.run_number }} 
-
-    
-
-        
+            joelmarques18/wishlist:latest
+            joelmarques18/wishlist:v${{ github.run_number }}
