@@ -21,8 +21,14 @@ jobs:
 
       -
         name: Increment Version
-        run: |
-          echo "((${{vars.IMAGE_VERSION}} + 1))" >> ${{vars.IMAGE_VERSION}}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const semver = require('semver');
+            const version = process.env.IMAGE_VERSION;
+            const incrementedVersion = semver.inc(version, 'patch');
+            console.log(`New version is ${incrementedVersion}`);
+            console.log(`::set-env name=IMAGE_VERSION::${incrementedVersion}`);
 
       -
         name: Build and push
