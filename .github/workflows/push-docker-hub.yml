@@ -21,7 +21,7 @@ jobs:
 
       -
         name: Increment Version
-        run: echo "::set-env name=IMAGE_VERSION::$(({{ vars.IMAGE_VERSION }} + 1))"
+        run: echo "::set-env name=IMAGE_VERSION::$((${{ vars.IMAGE_VERSION }} + 1))"
 
       -
         name: Build and push
