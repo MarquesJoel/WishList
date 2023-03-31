@@ -22,7 +22,7 @@ jobs:
       -
         name: Increment Version
         run: |
-          echo ${{vars.IMAGE_VERSION}} + 1 >> ${{vars.IMAGE_VERSION}}
+          echo $(expr ${{vars.IMAGE_VERSION}} + 1) >> ${{vars.IMAGE_VERSION}}
 
       -
         name: Build and push
@@ -32,8 +32,8 @@ jobs:
           file: ./src/WishList.API/Dockerfile
           push: true
           tags: |
-           joelmarques18/WishList:latest
-           joelmarques18/WishList: 
+           joelmarques18/wishList:latest
+           joelmarques18/wishList:${{ vars.IMAGE_VERSION }} 
 
     
 
