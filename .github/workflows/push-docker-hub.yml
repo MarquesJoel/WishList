@@ -22,7 +22,7 @@ jobs:
       -
         name: Increment Version
         run: |
-          echo $(IMAGE_VERSION + 1) >> $IMAGE_VERSION
+          echo $(expr $IMAGE_VERSION + 1) >> $IMAGE_VERSION
 
       -
         name: Build and push
