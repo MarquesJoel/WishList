@@ -18,21 +18,10 @@ jobs:
        with:
         username: ${{secrets.DOCKER_HUB_USER}}
         password: ${{secrets.DOCKER_HUB_PASSWORD}}
-      
-      -
-        name: Checkout Code
-        uses: actions/checkout@v2
-      
+
       -
         name: Increment Version
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const semver = require('semver');
-            const version = process.env.IMAGE_VERSION;
-            const incrementedVersion = semver.inc(version, 'patch');
-            console.log(`New version is ${incrementedVersion}`);
-            console.log(`::set-env name=IMAGE_VERSION::${incrementedVersion}`);
+        run: echo "::set-env name=IMAGE_VERSION::$(({{ vars.IMAGE_VERSION }} + 1))"
 
       -
         name: Build and push
