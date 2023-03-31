@@ -18,7 +18,11 @@ jobs:
        with:
         username: ${{secrets.DOCKER_HUB_USER}}
         password: ${{secrets.DOCKER_HUB_PASSWORD}}
-
+      
+      -
+        name: Checkout Code
+        uses: actions/checkout@v2
+      
       -
         name: Increment Version
         uses: actions/github-script@v4
