@@ -28,12 +28,12 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ../
+          context: ./
           file: ./src/WishList.API/Dockerfile
           push: true
           tags: |
            joelmarques18/wishlist:latest
-           joelmarques18/wishlist:${{ vars.IMAGE_VERSION }} 
+           joelmarques18/wishlist:v${{ vars.IMAGE_VERSION }} 
 
     
 
