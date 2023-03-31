@@ -18,11 +18,7 @@ jobs:
        with:
         username: ${{secrets.DOCKER_HUB_USER}}
         password: ${{secrets.DOCKER_HUB_PASSWORD}}
-
-      -
-        name: Increment Version
-        run: echo "::set-env name=IMAGE_VERSION::$((${{ vars.IMAGE_VERSION }} + 1))"
-
+      
       -
         name: Build and push
         uses: docker/build-push-action@v4
@@ -32,7 +28,7 @@ jobs:
           push: true
           tags: |
            joelmarques18/wishlist:latest
-           joelmarques18/wishlist:v${{ vars.IMAGE_VERSION }} 
+           joelmarques18/wishlist:v${{ vars.GITHUB_RUN_NUMBER }} 
 
     
 
