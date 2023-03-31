@@ -1,0 +1,40 @@
+name: Push Image to Docker Hub
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  CI:
+    runs-on: ubuntu-20.04
+    steps:
+      -
+       name: Docker Hub Login
+       uses: docker/login-action@v2
+       with:
+        username: ${{secrets.DOCKER_HUB_USER}}
+        password: ${{secrets.DOCKER_HUB_PASSWORD}}
+
+      -
+        name: Increment Version
+        run: |
+          echo $(IMAGE_VERSION + 1) >> $IMAGE_VERSION
+
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./src/WishList.API/Dockerfile
+          push: true
+          tags: |
+           joelmarques18/WishList:latest
+           joelmarques18/WishList: 
+
+    
+
+        
