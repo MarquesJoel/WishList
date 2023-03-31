@@ -22,7 +22,7 @@ jobs:
       -
         name: Increment Version
         run: |
-          echo ${{env.IMAGE_VERSION}} + 1 >> ${{env.IMAGE_VERSION}}
+          echo ${{vars.IMAGE_VERSION}} + 1 >> ${{vars.IMAGE_VERSION}}
 
       -
         name: Build and push
